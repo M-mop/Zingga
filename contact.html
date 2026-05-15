@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تواصل معنا — متجر الزنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080810;--s1:#10101c;--s2:#17172a;--s3:#1f1f35;--accent:#c87d5f;--accent-l:#e8a98a;--gold:#c9a84c;--green:#3ecf7a;--text:#ede9e3;--muted:#7a7891;--border:rgba(255,255,255,0.07);--border-h:rgba(200,125,95,0.35);--r:16px;--ease:cubic-bezier(.4,0,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;direction:rtl;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+.glow{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+.glow-1{width:600px;height:600px;background:rgba(200,125,95,.07);top:-200px;right:-100px}
+.glow-2{width:500px;height:500px;background:rgba(201,168,76,.05);bottom:-100px;left:-150px}
+header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.88);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff}
+.logo-name{font-size:18px;font-weight:900;color:var(--text)}
+nav{display:flex;align-items:center;gap:6px}
+.nav-link{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active{color:var(--accent-l)}
+.cart-btn{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);color:var(--text);text-decoration:none;padding:10px 20px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;transition:all .25s}
+.cart-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.cart-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:800;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.page{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:60px 24px 100px}
+.page-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.page-title{font-size:36px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.page-sub{font-size:15px;color:var(--muted);margin-bottom:52px;line-height:1.6}
+
+/* GRID */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:24px}
+
+/* CHANNELS */
+.channels{display:flex;flex-direction:column;gap:14px}
+.channel-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:16px;text-decoration:none;transition:all .25s var(--ease)}
+.channel-card:hover{border-color:var(--border-h);transform:translateX(-4px)}
+.ch-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
+.ch-icon.green{background:rgba(37,211,102,.12);color:#25d366}
+.ch-icon.blue{background:rgba(0,136,204,.12);color:#0088cc}
+.ch-icon.orange{background:rgba(200,125,95,.12);color:var(--accent-l)}
+.ch-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
+.ch-desc{font-size:13px;color:var(--muted)}
+.ch-badge{display:inline-block;background:rgba(62,207,122,.12);color:var(--green);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:5px}
+
+/* FORM */
+.form-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:32px}
+.form-card h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.form-card p{font-size:14px;color:var(--muted);margin-bottom:28px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:7px;letter-spacing:.3px}
+.field input,.field textarea,.field select{width:100%;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:13px 16px;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:15px;outline:none;transition:border-color .2s;resize:none}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--border-h)}
+.field select option{background:var(--s2)}
+.field textarea{height:120px}
+.fields-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--accent),#a86040);color:#fff;border:none;padding:16px;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:all .25s;margin-top:4px}
+.submit-btn:hover{opacity:.9;transform:translateY(-1px)}
+
+/* SUCCESS */
+.success-msg{display:none;text-align:center;padding:32px 0}
+.success-icon{width:64px;height:64px;border-radius:50%;background:rgba(62,207,122,.12);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--green)}
+.success-msg h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.success-msg p{font-size:14px;color:var(--muted)}
+
+/* FAQ */
+.faq{margin-top:52px}
+.faq-title{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;text-align:center}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.faq-item{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:20px}
+.faq-q{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.faq-a{font-size:13px;color:var(--muted);line-height:1.65}
+
+@media(max-width:768px){header{padding:0 20px;height:64px}nav{display:none}.page{padding:36px 16px 60px}.contact-grid{grid-template-columns:1fr}.page-title{font-size:28px}.fields-row{grid-template-columns:1fr}.faq-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="glow glow-1"></div><div class="glow glow-2"></div>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">ز</div>
+    <span class="logo-name">متجر الزنج</span>
+  </a>
+  <nav>
+    <a href="index.html" class="nav-link">المنتجات</a>
+    <a href="track.html" class="nav-link">تتبع طلبك</a>
+    <a href="contact.html" class="nav-link active">تواصل معنا</a>
+  </nav>
+  <a href="cart.html" class="cart-btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    السلة <span class="cart-badge" id="cart-count">0</span>
+  </a>
+</header>
+
+<div class="page">
+  <div class="page-eyebrow">خدمة العملاء</div>
+  <h1 class="page-title">تواصل معنا</h1>
+  <p class="page-sub">نحن هنا دائماً للمساعدة — تواصل معنا عبر القناة التي تناسبك وسنرد في أقرب وقت</p>
+
+  <div class="contact-grid">
+    <!-- القنوات -->
+    <div class="channels">
+      <a href="https://wa.me/966500000000" class="channel-card" target="_blank" rel="noopener">
+        <div class="ch-icon green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.849L.057 23.886l6.186-1.453A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.004-1.368l-.36-.213-3.72.874.933-3.636-.235-.374A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/></svg>
+        </div>
+        <div>
+          <div class="ch-title">واتساب</div>
+          <div class="ch-desc">تحدث مع فريقنا مباشرةً</div>
+          <div class="ch-badge">رد خلال دقائق</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/905340355912" class="channel-card" target="_blank" rel="noopener">
+        <div class="ch-icon green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.849L.057 23.886l6.186-1.453A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.004-1.368l-.36-.213-3.72.874.933-3.636-.235-.374A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/></svg>
+        </div>
+        <div>
+          <div class="ch-title">واتساب — خط ثاني</div>
+          <div class="ch-desc">+90 534 035 5912</div>
+          <div class="ch-badge">رد خلال دقائق</div>
+        </div>
+      </a>
+
+      <a href="mailto:support@zanj-store.com" class="channel-card">
+        <div class="ch-icon orange">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="ch-title">البريد الإلكتروني</div>
+          <div class="ch-desc">oo3oi@icloud.com</div>
+          <div class="ch-badge">رد خلال 24 ساعة</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- نموذج التواصل -->
+    <div class="form-card">
+      <h2>أرسل رسالة</h2>
+      <p>سنرد عليك في أقرب وقت ممكن</p>
+      <div id="form-wrap">
+        <div class="fields-row">
+          <div class="field"><label>الاسم الكامل</label><input type="text" placeholder="محمد أحمد" /></div>
+          <div class="field"><label>البريد الإلكتروني</label><input type="email" placeholder="you@example.com" /></div>
+        </div>
+        <div class="field">
+          <label>موضوع الرسالة</label>
+          <select>
+            <option value="">اختر الموضوع</option>
+            <option>استفسار عن منتج</option>
+            <option>مشكلة في الطلب</option>
+            <option>طلب استرجاع</option>
+            <option>شكوى</option>
+            <option>اقتراح</option>
+            <option>أخرى</option>
+          </select>
+        </div>
+        <div class="field"><label>رسالتك</label><textarea placeholder="اكتب رسالتك هنا…"></textarea></div>
+        <button class="submit-btn" onclick="sendForm()">إرسال الرسالة</button>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>تم إرسال رسالتك!</h3>
+        <p>سنتواصل معك خلال ٢٤ ساعة على بريدك الإلكتروني</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <div class="faq-title">الأسئلة الشائعة</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">كم يستغرق التوصيل؟</div>
+        <div class="faq-a">يتم الشحن خلال ٢٤ ساعة من تأكيد الطلب، ويصل خلال ٢-٥ أيام عمل حسب موقعك.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">هل يمكنني إلغاء طلبي؟</div>
+        <div class="faq-a">يمكن إلغاء الطلب خلال ساعتين من الشراء. تواصل معنا فوراً عبر واتساب.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">ما طرق الدفع المتاحة؟</div>
+        <div class="faq-a">ندعم الدفع عبر PayPal فقط حالياً، وهو آمن ومشفّر بالكامل.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">هل التوصيل مجاني؟</div>
+        <div class="faq-a">نعم! التوصيل مجاني على جميع الطلبات بدون حد أدنى للشراء.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){const s=JSON.parse(localStorage.getItem('cart'));if(s)document.getElementById('cart-count').textContent=s.length;})();
+function sendForm(){
+  document.getElementById('form-wrap').style.display='none';
+  document.getElementById('success-msg').style.display='block';
+}
+</script>
+</body>
+</html>
