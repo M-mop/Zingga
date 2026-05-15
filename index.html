@@ -20,16 +20,23 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .glow{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
 .glow-1{width:600px;height:600px;background:rgba(200,125,95,.07);top:-200px;right:-100px}
 .glow-2{width:500px;height:500px;background:rgba(201,168,76,.05);bottom:-100px;left:-150px}
-header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.85);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:14px}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.88);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none}
 .logo-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;box-shadow:0 4px 20px rgba(200,125,95,.3)}
 .logo-text{display:flex;flex-direction:column;line-height:1.15}
 .logo-name{font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.3px}
 .logo-tag{font-size:11px;font-weight:400;color:var(--muted)}
+nav{display:flex;align-items:center;gap:6px}
+.nav-link{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s var(--ease)}
+.nav-link:hover{color:var(--text);background:var(--s2)}
 .cart-btn{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);color:var(--text);text-decoration:none;padding:10px 20px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;transition:all .25s var(--ease)}
 .cart-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-1px)}
 .cart-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:800;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease)}
 .cart-btn:hover .cart-badge{background:#fff;color:var(--accent);transform:scale(1.2)}
+
+/* HERO */
 .hero{position:relative;z-index:1;padding:80px 48px 60px;text-align:center;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(200,125,95,.1),transparent 70%);pointer-events:none}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(200,125,95,.1);border:1px solid rgba(200,125,95,.25);color:var(--accent-l);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:24px}
@@ -40,11 +47,15 @@ header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.85);backdrop-fi
 .stat{text-align:center}
 .stat-num{font-size:26px;font-weight:900;color:var(--gold)}
 .stat-lbl{font-size:12px;color:var(--muted);margin-top:4px;font-weight:400}
+
+/* SECTION */
 .section{position:relative;z-index:1;padding:0 48px 80px}
 .section-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
 .section-line{flex:1;height:1px;background:var(--border)}
 .section-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
 .card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
 .card:hover{transform:translateY(-6px);border-color:var(--border-h);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(200,125,95,.1)}
 .card-img{position:relative;width:100%;height:260px;overflow:hidden;background:var(--s2)}
@@ -66,14 +77,27 @@ header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.85);backdrop-fi
 .add-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 .add-btn.done{background:var(--green);border-color:var(--green);color:#0a1a10;animation:pop .3s var(--ease)}
 @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
+
+/* TOAST */
 #toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--s2);border:1px solid var(--border-h);color:var(--text);padding:13px 24px;border-radius:50px;font-size:14px;font-weight:600;opacity:0;transition:all .3s var(--ease);z-index:999;pointer-events:none;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.footer-note{font-size:13px;color:var(--muted)}
-.footer-links{display:flex;gap:24px}
-.footer-links span{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px}
+.footer-brand .logo-name{font-size:20px;font-weight:900;color:var(--text)}
+.footer-brand p{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7}
+.footer-col h4{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s}
+.footer-col a:hover{color:var(--accent-l)}
+.footer-bottom{grid-column:1/-1;border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom span{font-size:13px;color:var(--muted)}
+.trust-badges{display:flex;gap:20px}
+.trust-badges span{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+
+@media(max-width:900px){footer{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){
   header{padding:0 20px;height:64px}
+  nav{display:none}
   .hero{padding:56px 20px 40px}
   .hero-stats{gap:24px}
   .section{padding:0 20px 60px}
@@ -82,12 +106,9 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
   .card-body{padding:14px 16px 16px}
   .card-name{font-size:16px}
   .card-desc{display:none}
-  footer{padding:24px 20px}
+  footer{padding:32px 20px;grid-template-columns:1fr}
 }
-@media(max-width:480px){
-  .products{grid-template-columns:1fr}
-  .hero-stats{flex-wrap:wrap;gap:20px}
-}
+@media(max-width:480px){.products{grid-template-columns:1fr}.hero-stats{flex-wrap:wrap;gap:20px}}
 </style>
 </head>
 <body>
@@ -95,13 +116,18 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 <div class="glow glow-2"></div>
 
 <header>
-  <div class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-mark">ز</div>
     <div class="logo-text">
       <span class="logo-name">متجر الزنج</span>
       <span class="logo-tag">الأرخص · الأفضل · الأسرع</span>
     </div>
-  </div>
+  </a>
+  <nav>
+    <a href="index.html" class="nav-link">المنتجات</a>
+    <a href="track.html" class="nav-link">تتبع طلبك</a>
+    <a href="contact.html" class="nav-link">تواصل معنا</a>
+  </nav>
   <a href="cart.html" class="cart-btn">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
     السلة
@@ -114,12 +140,10 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
     <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     منتجات مختارة بعناية
   </div>
-  <h1 class="hero-title">
-    <span>الأرخص</span> في المنطقة<br>بلا منافس
-  </h1>
+  <h1 class="hero-title"><span>الأرخص</span> في المنطقة<br>بلا منافس</h1>
   <p class="hero-sub">كل ما تحتاجه بأفضل الأسعار وجودة لا تُقارن — شحن سريع وخدمة على مدار الساعة</p>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">٧</div><div class="stat-lbl">منتجات حصرية</div></div>
+    <div class="stat"><div class="stat-num">٨</div><div class="stat-lbl">منتجات حصرية</div></div>
     <div class="stat"><div class="stat-num">٢٤/٧</div><div class="stat-lbl">دعم متواصل</div></div>
     <div class="stat"><div class="stat-num">١٠٠٪</div><div class="stat-lbl">ضمان الجودة</div></div>
   </div>
@@ -266,20 +290,59 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
       </div>
     </div>
 
+    <!-- ✅ المنتج الجديد: الخنثولي -->
+    <div class="card">
+      <div class="card-img">
+        <img src="https://i.ibb.co/v6QYDxCV/Whats-App-Image-2026-05-15-at-11-54-25-AM.jpg" alt="الخنثولي" loading="lazy">
+        <div class="card-badge">$5.50</div>
+        <div class="card-overlay"><button class="quick-add" onclick="addToCart(this,'الخنثولي',5.50)">أضف للسلة فوراً</button></div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">وصل حديثاً ✦</div>
+        <div class="card-name">الخنثولي</div>
+        <div class="card-desc">منتج فريد بطابع خاص لا يشبه غيره، لمن يحب الجرأة والتجديد في كل تفصيلة</div>
+        <div class="card-footer">
+          <div><div class="card-price">$5.50</div><div class="card-price-sub">شامل الضريبة</div></div>
+          <button class="add-btn" onclick="addToCart(this,'الخنثولي',5.50)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>أضف للسلة
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <span class="footer-note">© 2025 متجر الزنج — جميع الحقوق محفوظة</span>
-  <div class="footer-links">
-    <span>
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      دفع آمن عبر PayPal
-    </span>
-    <span>
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      شحن خلال ٢٤ ساعة
-    </span>
+  <div class="footer-brand">
+    <div class="logo-name">متجر الزنج</div>
+    <p>لسنا الوحيدون ولكننا الأفضل. منتجات مختارة بأسعار لا تُنافَس مع خدمة عملاء على مدار الساعة.</p>
+  </div>
+  <div class="footer-col">
+    <h4>روابط سريعة</h4>
+    <a href="index.html">المنتجات</a>
+    <a href="cart.html">السلة</a>
+    <a href="track.html">تتبع الطلب</a>
+    <a href="contact.html">تواصل معنا</a>
+  </div>
+  <div class="footer-col">
+    <h4>الدعم</h4>
+    <a href="contact.html">اتصل بنا</a>
+    <a href="track.html">أين طلبي؟</a>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 متجر الزنج — جميع الحقوق محفوظة</span>
+    <div class="trust-badges">
+      <span>
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        دفع آمن عبر PayPal
+      </span>
+      <span>
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        شحن خلال ٢٤ ساعة
+      </span>
+    </div>
   </div>
 </footer>
 
@@ -287,28 +350,21 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32
 
 <script>
 let cart=[];
-const ICON_PLUS='<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
-const ICON_CHECK='<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-
+const PLUS='<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+const CHECK='<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
 function addToCart(btn,name,price){
   cart.push({name,price});
   localStorage.setItem('cart',JSON.stringify(cart));
   document.getElementById('cart-count').textContent=cart.length;
   const t=document.getElementById('toast');
   t.textContent='✓ تمت إضافة "'+name+'" إلى السلة';
-  t.classList.add('show');
-  clearTimeout(t._t);
+  t.classList.add('show');clearTimeout(t._t);
   t._t=setTimeout(()=>t.classList.remove('show'),2400);
   const orig=btn.innerHTML;
-  btn.classList.add('done');
-  btn.innerHTML=ICON_CHECK+' تمت الإضافة';
+  btn.classList.add('done');btn.innerHTML=CHECK+' تمت الإضافة';
   setTimeout(()=>{btn.classList.remove('done');btn.innerHTML=orig},1600);
 }
-
-(function init(){
-  const s=JSON.parse(localStorage.getItem('cart'));
-  if(s){cart=s;document.getElementById('cart-count').textContent=cart.length;}
-})();
+(function(){const s=JSON.parse(localStorage.getItem('cart'));if(s){cart=s;document.getElementById('cart-count').textContent=cart.length;}})();
 </script>
 </body>
 </html>
