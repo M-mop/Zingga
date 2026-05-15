@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>السلة — متجر الزنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080810;--s1:#10101c;--s2:#17172a;--s3:#1f1f35;
+  --accent:#c87d5f;--accent-l:#e8a98a;--gold:#c9a84c;
+  --green:#3ecf7a;--red:#f87171;--text:#ede9e3;--muted:#7a7891;
+  --border:rgba(255,255,255,0.07);--border-h:rgba(200,125,95,0.35);
+  --r:16px;--ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;direction:rtl;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+.glow{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+.glow-1{width:600px;height:600px;background:rgba(200,125,95,.07);top:-200px;right:-100px}
+.glow-2{width:500px;height:500px;background:rgba(201,168,76,.05);bottom:-100px;left:-150px}
+
+header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.85);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;box-shadow:0 4px 20px rgba(200,125,95,.3)}
+.logo-name{font-size:18px;font-weight:900;color:var(--text)}
+.back-btn{display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s var(--ease);padding:10px 18px;border-radius:50px;border:1px solid var(--border);background:var(--s2)}
+.back-btn:hover{color:var(--text);border-color:var(--border-h)}
+
+.page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:52px 24px 100px}
+.page-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.page-title{font-size:36px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
+.page-sub{font-size:15px;color:var(--muted);margin-bottom:44px}
+
+/* empty */
+.empty{text-align:center;padding:80px 20px;display:none}
+.empty-icon{width:80px;height:80px;border-radius:50%;background:var(--s2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px}
+.empty h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.empty p{color:var(--muted);font-size:15px;margin-bottom:28px}
+.empty a{background:var(--accent);color:#fff;text-decoration:none;padding:13px 30px;border-radius:10px;font-weight:700;font-size:15px;transition:background .2s;display:inline-block}
+.empty a:hover{background:#b06649}
+
+/* items */
+#cart-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.ci{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;transition:border-color .2s var(--ease);animation:slideIn .3s var(--ease) both}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.ci:hover{border-color:var(--border-h)}
+.ci-num{width:30px;height:30px;border-radius:8px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);flex-shrink:0}
+.ci-name{flex:1;font-size:16px;font-weight:700;color:var(--text)}
+.ci-price{font-size:18px;font-weight:900;color:var(--green);direction:ltr;flex-shrink:0}
+.ci-del{background:transparent;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease);flex-shrink:0}
+.ci-del:hover{background:rgba(248,113,113,.15);border-color:var(--red);color:var(--red)}
+
+/* summary */
+.summary{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:28px 28px 0;overflow:hidden}
+.summary-title{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:15px;color:var(--muted);border-bottom:1px solid var(--border)}
+.sum-row:last-of-type{border-bottom:none}
+.sum-row.total-row{padding:20px 0 0;font-size:22px;font-weight:900;color:var(--text)}
+.sum-row.total-row span:last-child{color:var(--green)}
+.checkout-btn{width:100%;margin-top:24px;background:linear-gradient(135deg,var(--accent),#a86040);color:#fff;border:none;padding:18px;font-family:'Tajawal',sans-serif;font-size:17px;font-weight:800;cursor:pointer;transition:all .25s var(--ease);display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:.3px}
+.checkout-btn:hover{opacity:.9;transform:translateY(-1px)}
+.checkout-btn:active{transform:translateY(0)}
+.checkout-btn:disabled{background:var(--s3);color:var(--muted);cursor:not-allowed;transform:none}
+.trust-strip{display:flex;justify-content:center;gap:28px;padding:16px 0 20px;border-top:1px solid var(--border);margin-top:4px}
+.trust-item{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+
+@media(max-width:600px){
+  header{padding:0 20px;height:64px}
+  .page{padding:36px 16px 80px}
+  .page-title{font-size:28px}
+  .ci-name{font-size:14px}
+  .summary{padding:20px 20px 0}
+  .trust-strip{gap:16px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">ز</div>
+    <span class="logo-name">متجر الزنج</span>
+  </div>
+  <a href="index.html" class="back-btn">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    العودة للمتجر
+  </a>
+</header>
+
+<div class="page">
+  <div class="page-eyebrow">سلة التسوق</div>
+  <h1 class="page-title">طلبك الحالي</h1>
+  <p class="page-sub" id="page-sub">جاري التحميل…</p>
+
+  <div class="empty" id="empty">
+    <div class="empty-icon">🛒</div>
+    <h2>السلة فارغة</h2>
+    <p>لم تضف أي منتج بعد، ارجع للمتجر واختر ما يعجبك</p>
+    <a href="index.html">تسوق الآن</a>
+  </div>
+
+  <div id="cart-list"></div>
+
+  <div class="summary" id="summary" style="display:none">
+    <div class="summary-title">ملخص الطلب</div>
+    <div class="sum-row">
+      <span>عدد المنتجات</span>
+      <span id="s-count">0</span>
+    </div>
+    <div class="sum-row">
+      <span>التوصيل</span>
+      <span style="color:var(--green);font-weight:700">مجاني</span>
+    </div>
+    <div class="sum-row total-row">
+      <span>الإجمالي</span>
+      <span id="s-total">$0.00</span>
+    </div>
+    <button class="checkout-btn" id="checkout-btn" onclick="confirmOrder()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      تأكيد الطلب وإتمام الدفع
+    </button>
+    <div class="trust-strip">
+      <div class="trust-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        دفع آمن ومشفّر
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        PayPal الرسمي
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        شحن سريع لكل مكان
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let cart=[];
+
+function render(){
+  const list=document.getElementById('cart-list');
+  const empty=document.getElementById('empty');
+  const summary=document.getElementById('summary');
+  const sub=document.getElementById('page-sub');
+  const sCount=document.getElementById('s-count');
+  const sTotal=document.getElementById('s-total');
+  list.innerHTML='';
+  if(!cart.length){
+    empty.style.display='block';
+    summary.style.display='none';
+    sub.textContent='سلتك فارغة حالياً';
+    return;
+  }
+  empty.style.display='none';
+  summary.style.display='block';
+  sub.textContent=cart.length+' منتج في سلتك';
+  const total=cart.reduce((s,i)=>s+i.price,0);
+  cart.forEach((item,idx)=>{
+    const el=document.createElement('div');
+    el.className='ci';
+    el.style.animationDelay=(idx*.05)+'s';
+    el.innerHTML=
+      '<div class="ci-num">'+(idx+1)+'</div>'+
+      '<div class="ci-name">'+item.name+'</div>'+
+      '<div class="ci-price">$'+item.price.toFixed(2)+'</div>'+
+      '<button class="ci-del" onclick="removeItem('+idx+')" aria-label="حذف">'+
+        '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>'+
+      '</button>';
+    list.appendChild(el);
+  });
+  sCount.textContent=cart.length;
+  sTotal.textContent='$'+total.toFixed(2);
+}
+
+function removeItem(idx){
+  cart.splice(idx,1);
+  localStorage.setItem('cart',JSON.stringify(cart));
+  render();
+}
+
+function confirmOrder(){
+  const total=cart.reduce((s,i)=>s+i.price,0);
+  window.location.href='https://www.paypal.com/paypalme/Mohammedsade/'+total.toFixed(2);
+}
+
+(function init(){
+  const s=JSON.parse(localStorage.getItem('cart'));
+  if(s)cart=s;
+  render();
+})();
+</script>
+</body>
+</html>
