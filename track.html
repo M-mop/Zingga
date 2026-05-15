@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تتبع الطلب — متجر الزنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080810;--s1:#10101c;--s2:#17172a;--s3:#1f1f35;--accent:#c87d5f;--accent-l:#e8a98a;--gold:#c9a84c;--green:#3ecf7a;--text:#ede9e3;--muted:#7a7891;--border:rgba(255,255,255,0.07);--border-h:rgba(200,125,95,0.35);--r:16px;--ease:cubic-bezier(.4,0,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;direction:rtl;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+.glow{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+.glow-1{width:600px;height:600px;background:rgba(200,125,95,.07);top:-200px;right:-100px}
+.glow-2{width:500px;height:500px;background:rgba(201,168,76,.05);bottom:-100px;left:-150px}
+header{position:sticky;top:0;z-index:200;background:rgba(8,8,16,.88);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff}
+.logo-name{font-size:18px;font-weight:900;color:var(--text)}
+nav{display:flex;align-items:center;gap:6px}
+.nav-link{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--s2)}
+.nav-link.active{color:var(--accent-l)}
+.cart-btn{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);color:var(--text);text-decoration:none;padding:10px 20px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;transition:all .25s}
+.cart-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.cart-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:800;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.page{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:60px 24px 100px}
+.page-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.page-title{font-size:36px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.page-sub{font-size:15px;color:var(--muted);margin-bottom:44px;line-height:1.6}
+
+/* SEARCH BOX */
+.search-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:32px}
+.search-card h2{font-size:18px;font-weight:800;margin-bottom:6px}
+.search-card p{font-size:14px;color:var(--muted);margin-bottom:24px}
+.input-group{display:flex;gap:10px}
+.input-group input{flex:1;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:13px 18px;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.input-group input::placeholder{color:var(--muted)}
+.input-group input:focus{border-color:var(--border-h)}
+.track-btn{background:var(--accent);color:#fff;border:none;padding:13px 24px;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;white-space:nowrap}
+.track-btn:hover{background:#b06649}
+
+/* RESULT */
+#result{margin-top:28px;display:none}
+.order-info{background:var(--s2);border-radius:14px;padding:20px;margin-bottom:24px}
+.order-info .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
+.order-info .row:last-child{border-bottom:none}
+.order-info .row span:first-child{color:var(--muted)}
+.order-info .row span:last-child{font-weight:700}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:18px;position:relative}
+.step:not(:last-child)::before{content:'';position:absolute;right:19px;top:40px;width:2px;height:calc(100% - 8px);background:var(--border)}
+.step.done::before{background:var(--green)}
+.step-icon{width:40px;height:40px;border-radius:50%;border:2px solid var(--border);background:var(--s2);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;transition:all .3s}
+.step.done .step-icon{border-color:var(--green);background:rgba(62,207,122,.1);color:var(--green)}
+.step.active .step-icon{border-color:var(--accent);background:rgba(200,125,95,.15);color:var(--accent);box-shadow:0 0 0 4px rgba(200,125,95,.1)}
+.step-body{padding:8px 0 28px}
+.step-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.step.done .step-title{color:var(--green)}
+.step.active .step-title{color:var(--accent-l)}
+.step-desc{font-size:13px;color:var(--muted)}
+.step-time{font-size:12px;color:var(--muted);margin-top:4px;direction:ltr;text-align:right}
+
+/* DEMO NOTE */
+.demo-note{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:14px 18px;margin-top:24px;font-size:13px;color:var(--gold);display:flex;align-items:center;gap:10px}
+
+@media(max-width:600px){header{padding:0 20px;height:64px}nav{display:none}.page{padding:36px 16px 60px}.input-group{flex-direction:column}.page-title{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="glow glow-1"></div><div class="glow glow-2"></div>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">ز</div>
+    <span class="logo-name">متجر الزنج</span>
+  </a>
+  <nav>
+    <a href="index.html" class="nav-link">المنتجات</a>
+    <a href="track.html" class="nav-link active">تتبع طلبك</a>
+    <a href="contact.html" class="nav-link">تواصل معنا</a>
+  </nav>
+  <a href="cart.html" class="cart-btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    السلة <span class="cart-badge" id="cart-count">0</span>
+  </a>
+</header>
+
+<div class="page">
+  <div class="page-eyebrow">تتبع الشحنة</div>
+  <h1 class="page-title">أين طلبي؟</h1>
+  <p class="page-sub">أدخل رقم طلبك أو البريد الإلكتروني المستخدم عند الشراء لمعرفة حالة شحنتك</p>
+
+  <div class="search-card">
+    <h2>ابحث عن طلبك</h2>
+    <p>ستجد رقم الطلب في إيميل التأكيد الذي أرسلناه لك</p>
+    <div class="input-group">
+      <input type="text" id="order-input" placeholder="مثال: ZNG-2025-001" />
+      <button class="track-btn" onclick="trackOrder()">تتبع</button>
+    </div>
+    <div id="result">
+      <div class="order-info" id="order-info"></div>
+      <div class="timeline" id="timeline"></div>
+      <div class="demo-note">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        هذا عرض توضيحي — في الموقع الحقيقي يتم ربطه بقاعدة بيانات الطلبات
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){const s=JSON.parse(localStorage.getItem('cart'));if(s)document.getElementById('cart-count').textContent=s.length;})();
+
+function trackOrder(){
+  const val=document.getElementById('order-input').value.trim();
+  if(!val)return;
+  const result=document.getElementById('result');
+  const info=document.getElementById('order-info');
+  const timeline=document.getElementById('timeline');
+  result.style.display='block';
+
+  // Demo data
+  const statuses=[
+    {title:'تم استلام الطلب',desc:'تم تأكيد طلبك وبدأنا في معالجته',time:'اليوم 09:14 ص',done:true,active:false,icon:'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'},
+    {title:'جاري التجهيز',desc:'يتم الآن تجهيز منتجاتك وتغليفها بعناية',time:'اليوم 10:30 ص',done:true,active:false,icon:'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'},
+    {title:'في الطريق إليك',desc:'الشحنة مع مندوب التوصيل وستصلك قريباً',time:'اليوم 02:15 م',done:false,active:true,icon:'M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2 0M13 8h4l3 3v5h-7V8z'},
+    {title:'تم التسليم',desc:'وصل طلبك بنجاح',time:'غداً متوقعاً',done:false,active:false,icon:'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'},
+  ];
+
+  info.innerHTML=
+    '<div class="row"><span>رقم الطلب</span><span>'+val+'</span></div>'+
+    '<div class="row"><span>الحالة</span><span style="color:var(--accent-l)">في الطريق إليك 🚚</span></div>'+
+    '<div class="row"><span>التوصيل المتوقع</span><span>غداً بإذن الله</span></div>';
+
+  timeline.innerHTML=statuses.map(s=>
+    '<div class="step '+(s.done?'done':s.active?'active':'')+'">'+
+    '<div class="step-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="'+s.icon+'"/></svg></div>'+
+    '<div class="step-body"><div class="step-title">'+s.title+'</div><div class="step-desc">'+s.desc+'</div><div class="step-time">'+s.time+'</div></div>'+
+    '</div>'
+  ).join('');
+}
+</script>
+</body>
+</html>
